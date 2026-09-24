@@ -1,0 +1,186 @@
+{
+  "name": "ai-diff-viewer",
+  "displayName": "AI Diff Viewer",
+  "description": "Calm review of AI CLI edits — inline diff hunks in your normal editor, opt-in split-view diff, hover actions. For Claude Code, Codex, and Qwen.",
+  "version": "1.0.8",
+  "publisher": "mtglitch",
+  "license": "MIT",
+  "pricing": "Free",
+  "qna": "marketplace",
+  "galleryBanner": {
+    "color": "#0d1117",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EloWeld/ai-diff-viewer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EloWeld/ai-diff-viewer/issues"
+  },
+  "homepage": "https://github.com/EloWeld/ai-diff-viewer#readme",
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "SCM Providers"
+  ],
+  "keywords": [
+    "claude",
+    "claude code",
+    "ai",
+    "cli",
+    "diff",
+    "code review",
+    "codex",
+    "qwen"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ai-cli-diff-view",
+          "title": "AI Diff Viewer",
+          "icon": "media/claude-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "ai-cli-diff-view": [
+        {
+          "id": "ai-cli-diff-view.session",
+          "name": "Session",
+          "type": "webview"
+        }
+      ],
+      "explorer": [
+        {
+          "id": "ai-cli-diff-view.navBar",
+          "name": "AI Diff",
+          "type": "webview"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "ai-cli-diff-view.toggleMonitoring",
+        "title": "AI Diff Viewer: Toggle Monitoring"
+      },
+      {
+        "command": "ai-cli-diff-view.startSession",
+        "title": "AI Diff: Start Claude Session"
+      },
+      {
+        "command": "ai-cli-diff-view.acceptAllHunks",
+        "title": "AI Diff: Accept All Changes"
+      },
+      {
+        "command": "ai-cli-diff-view.acceptAllChanges",
+        "title": "AI Diff: Accept All Changes (All Files)"
+      },
+      {
+        "command": "ai-cli-diff-view.revertAllHunks",
+        "title": "AI Diff: Revert All Changes"
+      },
+      {
+        "command": "ai-cli-diff-view.acceptHunk",
+        "title": "AI Diff: Accept Hunk"
+      },
+      {
+        "command": "ai-cli-diff-view.revertHunk",
+        "title": "AI Diff: Revert Hunk"
+      },
+      {
+        "command": "ai-cli-diff-view.installHooks",
+        "title": "AI Diff: Install Claude CLI Hooks",
+        "icon": "$(plug)"
+      },
+      {
+        "command": "ai-cli-diff-view.openPendingFile",
+        "title": "AI Diff: Open Pending File (Diff)"
+      },
+      {
+        "command": "ai-cli-diff-view.openPendingFilePlain",
+        "title": "AI Diff: Open Pending File (Editor)"
+      },
+      {
+        "command": "ai-cli-diff-view.nextFile",
+        "title": "AI Diff: Next Edited File"
+      },
+      {
+        "command": "ai-cli-diff-view.prevFile",
+        "title": "AI Diff: Previous Edited File"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "ai-cli-diff-view.startSession",
+        "key": "ctrl+shift+a",
+        "mac": "cmd+shift+a"
+      },
+      {
+        "command": "ai-cli-diff-view.acceptAllHunks",
+        "key": "ctrl+shift+y",
+        "mac": "cmd+shift+y"
+      },
+      {
+        "command": "ai-cli-diff-view.prevFile",
+        "key": "alt+h",
+        "when": "ai-cli-diff-view.hasPendingDiff"
+      },
+      {
+        "command": "ai-cli-diff-view.nextFile",
+        "key": "alt+l",
+        "when": "ai-cli-diff-view.hasPendingDiff"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "ai-cli-diff-view.acceptAllHunks",
+          "when": "ai-cli-diff-view.hasPendingDiff",
+          "group": "navigation@1"
+        },
+        {
+          "command": "ai-cli-diff-view.revertAllHunks",
+          "when": "ai-cli-diff-view.hasPendingDiff",
+          "group": "navigation@2"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "AI Diff Viewer",
+      "properties": {
+        "ai-cli-diff-view.autoOpenDiffEditor": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically open the split-view diff editor when an AI CLI edits a file. When off, only inline decorations (highlights + CodeLens Accept/Revert) are shown; use the Session panel or 'AI Diff: Open Pending File (Diff)' command to open the diff editor manually."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "test": "npm run compile && node tests/run.cjs",
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.7.1",
+    "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "@vscode/codicons": "^0.0.45",
+    "material-icon-theme": "^5.32.0"
+  }
+}

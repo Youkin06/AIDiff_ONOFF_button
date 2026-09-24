@@ -1,0 +1,8 @@
+{
+  "name": "ai-diff-monitoring-test-driver",
+  "publisher": "local-tests",
+  "version": "0.0.1",
+  "engines": { "vscode": "^1.85.0" },
+  "activationEvents": ["*"],
+  "main": "./index.cjs"
+}

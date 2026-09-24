@@ -1,0 +1,15 @@
+src/**
+.claude/**
+.vscode/**
+.github/**
+docs/**
+*.vsix
+node_modules/**
+!node_modules/@vscode/codicons/dist/**
+!node_modules/material-icon-theme/icons/**
+**/*.ts
+**/*.map
+tsconfig.json
+scripts/**
+tests/**
+.vscode-test/**
